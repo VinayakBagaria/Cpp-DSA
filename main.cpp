@@ -1,8 +1,8 @@
 #include <iostream>
-#include "codeforces/1722-a.cpp"
+#include "codeforces/1283-a.cpp"
 using namespace std;
 
 int main() {
-    spellCheck();
+    minutesBefore();
     return 0;
 }
