@@ -1,8 +1,8 @@
 #include <iostream>
-#include "codeforces/beautiful-matrix.cpp"
+#include "codeforces/112-a.cpp"
 using namespace std;
 
 int main() {
-    beautifulMatrix();
+    petyaAndStrings();
     return 0;
 }
