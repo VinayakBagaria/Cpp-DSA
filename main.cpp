@@ -1,8 +1,8 @@
 #include <iostream>
-#include "codeforces/112-a.cpp"
+#include "codeforces/1722-a.cpp"
 using namespace std;
 
 int main() {
-    petyaAndStrings();
+    spellCheck();
     return 0;
 }
