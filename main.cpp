@@ -1,8 +1,8 @@
 #include <iostream>
-#include "codeforces/next-round.cpp"
+#include "codeforces/beautiful-matrix.cpp"
 using namespace std;
 
 int main() {
-    nextRound();
+    beautifulMatrix();
     return 0;
 }
