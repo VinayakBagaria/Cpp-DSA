@@ -1,8 +1,8 @@
 #include <iostream>
-#include "codeforces/1283-a.cpp"
+#include "codeforces/1831-b.cpp"
 using namespace std;
 
 int main() {
-    minutesBefore();
+    arrayMerging();
     return 0;
 }
