@@ -7,12 +7,12 @@
 
 using namespace std;
 
-int solve(vector<string>& words, string target, int pos, int ti, vector<vector<int>>& dp, vector<vector<int>>& freq) {
+int solve(int arrLen, string target, int pos, int ti, vector<vector<int>>& dp, vector<vector<int>>& freq) {
     if (ti == target.size()) {
         return 1;
     }
 
-    if (pos == words[0].size()) {
+    if (pos == arrLen) {
         return 0;
     }
 
@@ -20,9 +20,9 @@ int solve(vector<string>& words, string target, int pos, int ti, vector<vector<i
         return dp[pos][ti];
     }
 
-    int count = solve(words, target, pos + 1, ti, dp, freq);
+    int count = solve(arrLen, target, pos + 1, ti, dp, freq);
     int charCount = freq[target[ti] - 'a'][pos];
-    count += charCount * solve(words, target, pos + 1, ti + 1, dp, freq);
+    count += charCount * solve(arrLen, target, pos + 1, ti + 1, dp, freq);
     return dp[pos][ti] = count;
 }
 
@@ -39,7 +39,7 @@ int numWays(vector<string>& words, string target) {
     }
 
     vector<vector<int>> dp(n, vector<int>(m, -1));
-    return solve(words, target, 0, 0, dp, freq);
+    return solve(words[0].size(), target, 0, 0, dp, freq);
 }
 
 void doWork() {
