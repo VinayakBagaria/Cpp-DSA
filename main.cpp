@@ -1,8 +1,7 @@
-#include <iostream>
-#include "codeforces/1831-b.cpp"
+#include "leetcode/1639-hard.cpp"
 using namespace std;
 
 int main() {
-    arrayMerging();
+    doWork();
     return 0;
 }
