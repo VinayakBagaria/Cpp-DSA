@@ -1,4 +1,4 @@
-#include "dp/cses-dice-combinations.cpp"
+#include "dp/cses-minimizing-coins.cpp"
 using namespace std;
 
 int main() {
