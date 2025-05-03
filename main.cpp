@@ -1,4 +1,4 @@
-#include "tree/cses-subordinates.cpp"
+#include "dp/cses-dice-combinations.cpp"
 using namespace std;
 
 int main() {
