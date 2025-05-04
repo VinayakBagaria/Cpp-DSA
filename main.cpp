@@ -1,4 +1,4 @@
-#include "dp/cses-grid-paths.cpp"
+#include "dp/cses-book-shop.cpp"
 using namespace std;
 
 int main() {
