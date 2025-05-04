@@ -1,4 +1,4 @@
-#include "dp/cses-removing-digits.cpp"
+#include "dp/cses-grid-paths.cpp"
 using namespace std;
 
 int main() {
