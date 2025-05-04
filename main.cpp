@@ -1,4 +1,4 @@
-#include "dp/cses-book-shop.cpp"
+#include "dp/cses-array-description.cpp"
 using namespace std;
 
 int main() {
