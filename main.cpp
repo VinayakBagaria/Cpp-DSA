@@ -1,4 +1,4 @@
-#include "dp/cses-coin-combinations-2.cpp"
+#include "dp/cses-removing-digits.cpp"
 using namespace std;
 
 int main() {
