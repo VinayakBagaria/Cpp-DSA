@@ -1,4 +1,4 @@
-#include "tree/cses-company-queries-1.cpp"
+#include "sorting-searching/cses-apartments.cpp"
 using namespace std;
 
 int main() {
