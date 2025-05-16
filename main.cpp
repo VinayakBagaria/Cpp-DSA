@@ -1,4 +1,4 @@
-#include "sorting-searching/cses-apartments.cpp"
+#include "sliding-window/cses-sum.cpp"
 using namespace std;
 
 int main() {
