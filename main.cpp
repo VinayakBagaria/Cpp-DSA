@@ -1,4 +1,4 @@
-#include "sliding-window/cses-minimum.cpp"
+#include "graph/cses-course-schedule-2.cpp"
 using namespace std;
 
 int main() {
