@@ -1,4 +1,4 @@
-#include "sliding-window/cses-sum.cpp"
+#include "sliding-window/cses-minimum.cpp"
 using namespace std;
 
 int main() {
