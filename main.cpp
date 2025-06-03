@@ -1,4 +1,4 @@
-#include "graph/bipartite-graph-dfs.cpp"
+#include "graph/alien-dictionary.cpp"
 using namespace std;
 
 int main() {
