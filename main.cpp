@@ -1,4 +1,4 @@
-#include "strings/leetcode-3561-medium.cpp"
+#include "graph/bipartite-graph-dfs.cpp"
 using namespace std;
 
 int main() {
