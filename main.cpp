@@ -1,4 +1,4 @@
-#include "tree/leetcode-1376-medium.cpp"
+#include "graph/dijkstra.cpp"
 using namespace std;
 
 int main() {
