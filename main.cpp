@@ -1,4 +1,4 @@
-#include "graph/leetcode-1334-medium-dijkstra.cpp"
+#include "graph/leetcode-1334-medium-floyd-warshall.cpp"
 using namespace std;
 
 int main() {

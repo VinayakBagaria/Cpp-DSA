@@ -6,21 +6,26 @@ using namespace std;
 class Solution {
 public:
     int findTheCity(int n, const vector<vector<int>>& edges, int distanceThreshold) {
-        unordered_map<int, vector<pair<int, int>>> adj;
+        vector<vector<int>> dist(n, vector<int>(n, 1e9));
         for (auto edg : edges) {
             int u = edg[0], v = edg[1], wt = edg[2];
-            adj[u].push_back({v, wt});
-            adj[v].push_back({u, wt});
+            dist[u][v] = wt;
+            dist[v][u] = wt;
         }
 
-        vector<vector<int>> dist(n, vector<int>(n, 1e9));
+        for (int i = 0; i < n; i++) dist[i][i] = 0;
 
-        for (int i = 0; i < n; i++) {
-            dijkstra(i, dist[i], adj);
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                }
+            }
         }
 
         int adjCount = n;
         int city = -1;
+
         for (int i = 0; i < n; i++) {
             int count = 0;
             for (int j = 0; j < n; j++) {
@@ -34,29 +39,8 @@ public:
                 city = i;
             }
         }
+
         return city;
-    }
-
-    void dijkstra(int src, vector<int>& dist, unordered_map<int, vector<pair<int, int>>>& adj) {
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        pq.push({0, src});
-        dist[src] = 0;
-
-        while (!pq.empty()) {
-            int wt = pq.top().first;
-            int curr = pq.top().second;
-            pq.pop();
-
-            for (auto it : adj[curr]) {
-                int v = it.first, cost = it.second;
-
-                int newDist = wt + cost;
-                if (newDist < dist[v]) {
-                    dist[v] = newDist;
-                    pq.push({newDist, v});
-                }
-            }
-        }
     }
 };
 
