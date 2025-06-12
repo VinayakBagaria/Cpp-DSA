@@ -1,4 +1,4 @@
-#include "binarySearch/leetcode-162-medium.cpp"
+#include "dp/atcode-frog-1.cpp"
 using namespace std;
 
 int main() {
