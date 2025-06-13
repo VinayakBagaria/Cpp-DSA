@@ -1,4 +1,4 @@
-#include "dp/atcode-frog-2.cpp"
+#include "dp/atcoder-frog-b.cpp"
 using namespace std;
 
 int main() {
