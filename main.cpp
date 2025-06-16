@@ -1,4 +1,4 @@
-#include "binarySearch/gfg-equalize-towers.cpp"
+#include "binarySearch/gfg-koko-eating-bananas.cpp"
 using namespace std;
 
 int main() {
