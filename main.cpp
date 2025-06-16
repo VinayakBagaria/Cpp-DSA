@@ -1,4 +1,4 @@
-#include "backtracking/leetcode-78-medium.cpp"
+#include "binarySearch/gfg-equalize-towers.cpp"
 using namespace std;
 
 int main() {
