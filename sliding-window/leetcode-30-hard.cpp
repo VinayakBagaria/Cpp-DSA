@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/substring-with-concatenation-of-all-words/
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -6,34 +7,52 @@ class Solution {
 public:
     vector<int> findSubstring(string s, vector<string>& words) {
         int wordCount = words.size();
-        int wordSize = words[0].size();
+        int wordLen = words[0].size();
         int n = s.size();
 
         unordered_map<string, int> needWindow;
         for (string word : words) needWindow[word]++;
 
         vector<int> result;
-        int limit = n - (wordCount * wordSize) + 1;
 
-        for (int i = 0; i < limit; i++) {
+        // Sliding window length of wordCount * wordLen
+        // If size of every word is 3, loop from 0, 1, 2.
+        for (int i = 0; i < wordLen; i++) {
             unordered_map<string, int> currWindow;
-            int j = 0;
+            int count = 0;
+            int l = i;
 
-            while (j < wordCount) {
-                string word = s.substr(i + j * wordSize, wordSize);
+            for (int r = l; r < n; r += wordLen) {
+                string word = s.substr(r, wordLen);
+
                 if (needWindow.find(word) != needWindow.end()) {
                     currWindow[word]++;
-                    if (currWindow[word] > needWindow[word]) {
-                        break;
+                    count++;
+
+                    // If current word count has exceeded, try shrinking from left
+                    // Remove invalid words from count
+                    while (currWindow[word] > needWindow[word]) {
+                        string left = s.substr(l, wordLen);
+                        currWindow[left]--;
+                        count--;
+                        l += wordLen;
+                    }
+
+                    if (count == wordCount) {
+                        result.push_back(l);
                     }
                 } else {
-                    break;
-                }
-                j++;
-            }
+                  currWindow.clear();
+                  count = 0;
+                  
+                  // We didn't get r - r + wordLen string in the need window
+                  // So, skip all words till r + wordLen
 
-            if (j == wordCount) {
-                result.push_back(i);
+                  // Thus, skip all words from [i...r + wordLen] as they are invalid
+                  // Reset the window to start all counting again
+                  // Hence, we make l == r
+                  l = r + wordLen;
+                }
             }
         }
 
