@@ -1,4 +1,4 @@
-#include "backtracking/leetcode-3537-medium.cpp"
+#include "binarySearch/gfg-coin-piles.cpp"
 using namespace std;
 
 int main() {
