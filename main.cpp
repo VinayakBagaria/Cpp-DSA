@@ -1,4 +1,4 @@
-#include "binarySearch/gfg-coin-piles.cpp"
+#include "sliding-window/gfg-find-minimum-of-size-k.cpp"
 using namespace std;
 
 int main() {
