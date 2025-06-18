@@ -1,4 +1,4 @@
-#include "dp/leetcode-516-medium.cpp"
+#include "dp/gfg-print-all-lcs.cpp"
 using namespace std;
 
 int main() {
