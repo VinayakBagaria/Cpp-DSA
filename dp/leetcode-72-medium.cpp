@@ -63,6 +63,27 @@ public:
         return dp[w1][w2];
     }
 
+    int bottomUpLinear(string word1, string word2) {
+        int w1 = word1.size(), w2 = word2.size();
+        vector<int> prev(w2 + 1, 0), curr(w2 + 1, 0);
+        for (int j = 0; j <= w2; j++) prev[j] = j;
+
+        for (int i = 1; i <= w1; i++) {
+            curr[0] = i;
+            for (int j = 1; j <= w2; j++) {
+                if (word1[i - 1] == word2[j - 1]) {
+                    curr[j] = prev[j - 1];
+                } else {
+                    curr[j] = 1 + min(min(prev[j - 1], prev[j]), curr[j - 1]);
+                }
+            }
+
+            prev = curr;
+        }
+
+        return prev[w2];
+    }
+
     int minDistance(string word1, string word2) {
         vector<vector<int>> dp(word1.size(), vector<int>(word2.size(), -1));
         return solve(0, 0, word1, word2, dp);
@@ -73,11 +94,11 @@ public:
 void doWork() {
     Solution sol;
     cout << sol.minDistance("horse", "ros") << endl;
-    cout << sol.bottomUp("horse", "ros") << endl;
+    cout << sol.bottomUpLinear("horse", "ros") << endl;
 
     cout << sol.minDistance("intention", "execution") << endl;
-    cout << sol.bottomUp("intention", "execution") << endl;
+    cout << sol.bottomUpLinear("intention", "execution") << endl;
 
     cout << sol.minDistance("", "a") << endl;
-    cout << sol.bottomUp("", "a") << endl;
+    cout << sol.bottomUpLinear("", "a") << endl;
 }
