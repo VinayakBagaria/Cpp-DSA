@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/longest-common-subsequence/description/
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -45,14 +46,36 @@ public:
 
         return dp[n][m];
     }
+
+    int bottomUpLinear(string t1, string t2) {
+        int n = t1.size(), m = t2.size();
+        vector<int> prev(m + 1, 0), curr(m + 1, 0);
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (t1[i - 1] == t2[j - 1]) {
+                    curr[j] = 1 + prev[j-1];
+                } else {
+                    curr[j] = max(prev[j], curr[j-1]);
+                }
+            }
+
+            prev = curr;
+        }
+
+        return prev[m];
+    }
 };
 
 void doWork() {
     Solution sol;
     cout << sol.longestCommonSubsequence("abcde", "ace") << endl;
     cout << sol.bottomUp("abcde", "ace") << endl;
+    cout << sol.bottomUpLinear("abcde", "ace") << endl;
     cout << sol.longestCommonSubsequence("abc", "abc") << endl;
     cout << sol.bottomUp("abc", "abc") << endl;
+    cout << sol.bottomUpLinear("abc", "abc") << endl;
     cout << sol.longestCommonSubsequence("abc", "def") << endl;
     cout << sol.bottomUp("abc", "def") << endl;
+    cout << sol.bottomUpLinear("abc", "def") << endl;
 }
