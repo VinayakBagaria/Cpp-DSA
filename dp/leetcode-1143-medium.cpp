@@ -28,11 +28,31 @@ public:
         vector<vector<int>> dp(n, vector<int>(m, -1));
         return solve(n-1, m-1, n, m, text1, text2, dp);
     }
+
+    int bottomUp(string t1, string t2) {
+        int n = t1.size(), m = t2.size();
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+        
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (t1[i - 1] == t2[j - 1]) {
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                } else {
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+        }
+
+        return dp[n][m];
+    }
 };
 
 void doWork() {
     Solution sol;
     cout << sol.longestCommonSubsequence("abcde", "ace") << endl;
+    cout << sol.bottomUp("abcde", "ace") << endl;
     cout << sol.longestCommonSubsequence("abc", "abc") << endl;
+    cout << sol.bottomUp("abc", "abc") << endl;
     cout << sol.longestCommonSubsequence("abc", "def") << endl;
+    cout << sol.bottomUp("abc", "def") << endl;
 }
