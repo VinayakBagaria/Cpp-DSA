@@ -1,4 +1,4 @@
-#include "backtracking/gfg-palindromic-partitions.cpp"
+#include "dp/leetcode-72-medium.cpp"
 using namespace std;
 
 int main() {
