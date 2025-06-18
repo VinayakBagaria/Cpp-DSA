@@ -60,7 +60,7 @@ public:
     }
 };
 
-void printResult(vector<int> result) {
+void print(vector<int> result) {
     for (int r : result) cout << r << " ";
     cout << endl;
 }
@@ -68,6 +68,6 @@ void printResult(vector<int> result) {
 void doWork() {
     Solution sol;
     vector<string> words = {"foo","bar"};
-    printResult(sol.findSubstring("barfoothefoobarman", words));
-    printResult(sol.findSubstring("barfoot", words));
+    print(sol.findSubstring("barfoothefoobarman", words));
+    print(sol.findSubstring("barfoot", words));
 }
