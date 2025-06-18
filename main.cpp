@@ -1,4 +1,4 @@
-#include "sliding-window/gfg-find-minimum-of-size-k.cpp"
+#include "sliding-window/leetcode-3439-medium.cpp"
 using namespace std;
 
 int main() {
