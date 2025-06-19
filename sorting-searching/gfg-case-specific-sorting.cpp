@@ -5,6 +5,39 @@ using namespace std;
 
 class Solution {
   public:
+    string caseSortOptimized(string s) {
+        vector<int> low(26, 0), high(26, 0);
+        for (char c : s) {
+            if (islower(c)) {
+                low[c - 'a']++;
+            } else {
+                high[c - 'A']++;
+            }
+        }
+        
+        string result = s;
+        int l = 0, h = 0;
+        for (int i = 0; i < s.size(); i++) {
+            if (islower(s[i])) {
+                while (low[l] == 0) {
+                    l++;
+                }
+                
+                result[i] = l + 'a';
+                low[l]--;
+            } else {
+                while (high[h] == 0) {
+                    h++;
+                }
+                
+                result[i] = h + 'A';
+                high[h]--;
+            }
+        }
+        
+        return result;
+    }
+
     string caseSort(string s) {
         int n = s.size();
 
@@ -39,5 +72,7 @@ class Solution {
 void doWork() {
     Solution sol;
     cout << sol.caseSort("GEekS") << endl;
+    cout << sol.caseSortOptimized("GEekS") << endl;
     cout << sol.caseSort("defRTSersUXI") << endl;
+    cout << sol.caseSortOptimized("defRTSersUXI") << endl;
 }
