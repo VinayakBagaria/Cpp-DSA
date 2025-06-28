@@ -7,43 +7,40 @@ class Solution {
 public:
     string simplifyPath(string path) {
         int n = path.size();
+        // stack contains all folders, which will be separated by / at the end
         stack<string> st;
-        st.push("/");
 
-        int i = 0;
-        while (i < n) {
+        for (int i = 0; i < n; i++) {
+            // If a / is encountered, don't do anything with it in the stack
+            if (path[i] == '/') continue;
+
             string curr = "";
-
             while(i < n && path[i] != '/') {
                 curr += path[i];
                 i++;
             }
 
+            // Nothing to do if . is encountered
+            if (curr == ".") continue;
+
+            // If we need to go back, pop previous directory from the stack if possible
             if (curr == "..") {
-                if (st.size() > 1) {
-                    st.pop();
+                if (!st.empty()) {
                     st.pop();
                 }
-            } else if (curr.size() > 0 && curr != ".") {
+            } else {
                 st.push(curr);
-                st.push("/");
             }
-
-
-            while (i < n && path[i] == '/') {
-                i++;
-            }
-        }
-
-        if (st.size() > 1 && st.top() == "/") {
-            st.pop();
         }
 
         string result;
         while (!st.empty()) {
-            result = st.top() + result;
+            result = "/" + st.top() + result;
             st.pop();
         }
+
+        // Case to handle "/.."
+        if (result.size() == 0) result = "/";
 
         return result;
     }
