@@ -1,4 +1,4 @@
-#include "stack/leetcode-71-medium.cpp"
+#include "twoPointer/leetcode-1498-medium.cpp"
 using namespace std;
 
 int main() {
