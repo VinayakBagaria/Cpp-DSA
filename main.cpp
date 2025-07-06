@@ -1,4 +1,4 @@
-#include "sliding-window/leetcode-424-medium.cpp"
+#include "sliding-window/gfg-maximum-number-of-ones.cpp"
 using namespace std;
 
 int main() {
