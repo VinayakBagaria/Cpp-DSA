@@ -7,24 +7,32 @@ class Solution {
 public:
     int maxFreeTime(int eventTime, int k, vector<int>& startTime, vector<int>& endTime) {
         int n = startTime.size();
-        vector<int> gaps(n+1, 0);
-        gaps[0] = startTime[0];
-        gaps[n] = eventTime - endTime[n-1];
 
+        // Get all free-time b/w each events
+        vector<int> freeTime;
+        freeTime.push_back(startTime[0]);
         for (int i = 1; i < n; i++) {
-            gaps[i] = startTime[i] - endTime[i-1];
+            freeTime.push_back(startTime[i] - endTime[i-1]);
+        }
+        freeTime.push_back(eventTime - endTime[n-1]);
+
+        // Shifting required = k
+        // Therefore, we need to combine (k + 1) free-time
+        // 1 shift = F1 + F2, F2 + F3 ...
+        int l = 0, r = 0, res = 0, curr = 0;
+        while (r < freeTime.size()) {
+            curr += freeTime[r];
+
+            if (r - l + 1 > k + 1) {
+                curr -= freeTime[l];
+                l++;
+            }
+
+            res = max(res, curr);
+            r++;
         }
 
-        int sum = 0;
-        for (int i = 0; i <= k; i++) sum += gaps[i];
-
-        int maxi = sum;
-        for (int i = k + 1; i < gaps.size(); i++) {
-            sum -= gaps[i-k-1];
-            sum += gaps[i];
-            maxi = max(maxi, sum);
-        }
-        return maxi;
+        return res;
     }
 };
 
