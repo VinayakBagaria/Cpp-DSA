@@ -1,4 +1,4 @@
-#include "trie/leetcode-1233-medium.cpp"
+#include "leetcode/3618-medium.cpp"
 using namespace std;
 
 int main() {
