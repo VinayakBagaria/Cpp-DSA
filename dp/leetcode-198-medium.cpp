@@ -10,13 +10,27 @@ public:
             return 0;
         }
 
-        if (dp[i] != -1) return dp[i];
+        int take = nums[i];
+        if (i > 1) take += solve(nums, i-2, dp);
+            
+        int notTake = solve(nums, i-1, dp);
+        return dp[i] = max(take, notTake);
+    }
 
-        int maxi = 0;
-        for (int j = i - 2; j >= 0; j--) {
-            maxi = max(maxi, solve(nums, j, dp));
+    int bottomUp(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> dp(n);
+        dp[0] = nums[0];
+
+        for (int i = 1; i < n; i++) {
+            int take = nums[i];
+            if (i > 1) take += dp[i-2];
+            
+            int notTake = dp[i-1];
+            dp[i] = max(take, notTake);
         }
-        return dp[i] = nums[i] + maxi;
+
+        return dp[n-1];
     }
 
     int rob(vector<int>& nums) {
@@ -30,10 +44,11 @@ void doWork() {
     Solution sol;
     vector<int> vec = {1,2,3,1};
     cout << sol.rob(vec) << endl;
-    // cout << sol.bottomUp(vec) << endl;
+    cout << sol.bottomUp(vec) << endl;
     vec = {2, 1, 4, 9};
     cout << sol.rob(vec) << endl;
-    // cout << sol.bottomUp(vec) << endl;
+    cout << sol.bottomUp(vec) << endl;
     vec = {2,7,9,3,1};
+    cout << sol.bottomUp(vec) << endl;
     cout << sol.rob(vec) << endl;
 }
