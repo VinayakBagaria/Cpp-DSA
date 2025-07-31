@@ -16,7 +16,7 @@ class Solution {
         return dp[n] = solve(n - 1, dp) + solve(n - 2, dp);
     }
 
-    int topDown(int n) {
+    int bottomUp(int n) {
         vector<int> dp(n + 1, 0);
         dp[0] = dp[1] = 1;
 
@@ -37,9 +37,9 @@ class Solution {
 void doWork() {
     Solution sol;
     cout << sol.countWays(2) << endl;
-    cout << sol.topDown(2) << endl;
+    cout << sol.bottomUp(2) << endl;
     cout << sol.countWays(4) << endl;
-    cout << sol.topDown(4) << endl;
+    cout << sol.bottomUp(4) << endl;
     cout << sol.countWays(18) << endl;
-    cout << sol.topDown(18) << endl;
+    cout << sol.bottomUp(18) << endl;
 }
