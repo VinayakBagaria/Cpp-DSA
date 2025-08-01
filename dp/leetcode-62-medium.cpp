@@ -33,12 +33,27 @@ public:
 
         return dp[0][0];
     }
+
+    int spaceBottomUp(int m, int n) {
+        vector<int> prev(n, 1), curr(n, 1);
+
+        for (int r = m-2; r >= 0; r--) {
+            for (int c = n-2; c >= 0; c--) {
+                curr[c] = prev[c] + curr[c + 1];
+            }
+            prev = curr;
+        }
+
+        return prev[0];
+    }
 };
 
 void doWork() {
     Solution sol;
     cout << sol.uniquePaths(3, 7) << endl;
     cout << sol.bottomUp(3, 7) << endl;
+    cout << sol.spaceBottomUp(3, 7) << endl;
     cout << sol.uniquePaths(3, 2) << endl;
     cout << sol.bottomUp(3, 2) << endl;
+    cout << sol.spaceBottomUp(3, 2) << endl;
 }
