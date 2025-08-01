@@ -20,6 +20,28 @@ class Solution {
         return dp[i][last] = maxi;
     }
 
+    int bottomUp(vector<vector<int>>& arr) {
+        int n = arr.size();
+        vector<vector<int>> dp(arr.size(), vector<int>(3, 0));
+
+        dp[0][0] = max(arr[0][1], arr[0][2]);
+        dp[0][1] = max(arr[0][0], arr[0][2]);
+        dp[0][2] = max(arr[0][0], arr[0][1]);
+
+        for (int day = 1; day < n; day++) {
+            for (int last = 0; last < 3; last++) {
+                int maxi = 0;
+                for (int task = 0; task < arr[day].size(); task++) {
+                    if (task == last) continue;
+                    maxi = max(maxi, arr[day][task] + dp[day-1][task]);
+                }
+                dp[day][last] = maxi;
+            }
+        }
+
+        return max(dp[n-1][0], max(dp[n-1][1], dp[n-1][2]));
+    }
+
     int maximumPoints(vector<vector<int>>& arr) {
         vector<unordered_map<int, int>> dp(arr.size());
         return solve(0, -1, arr, dp);
@@ -31,9 +53,11 @@ void doWork() {
     Solution sol;
     vector<vector<int>> vec = {{1, 2, 5}, {3, 1, 1}, {3, 3, 3}};
     cout << sol.maximumPoints(vec) << endl;
+    cout << sol.bottomUp(vec) << endl;
     vec = {{1,1,1}, {2,2,2}, {3,3,3}};
     cout << sol.maximumPoints(vec) << endl;
+    cout << sol.bottomUp(vec) << endl;
     vec = {{10, 40, 70}, {20, 50, 80}, {30, 60, 90}};
     cout << sol.maximumPoints(vec) << endl;
-    // cout << sol.bottomUp(2) << endl;
+    cout << sol.bottomUp(vec) << endl;
 }
