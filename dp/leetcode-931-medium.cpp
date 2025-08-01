@@ -22,12 +22,38 @@ public:
         for (int c = 0; c < n; c++) ans = min(ans, solve(0, c, m, n, matrix, dp));
         return ans;
     }
+
+    int bottomUp(vector<vector<int>>& matrix) {
+        int m = matrix.size(), n = matrix[0].size();
+        vector<vector<int>> dp(m, vector<int>(n));
+        
+        for (int r = m-1; r >= 0; r--) {
+            for (int c = n-1; c >= 0; c--) {
+                if (r == m-1) {
+                    dp[r][c] = matrix[r][c];
+                } else {
+                    int mini = dp[r+1][c];
+                    if (c >= 1) {
+                        mini = min(mini, dp[r+1][c-1]);
+                    }
+                    if (c + 1 < n) {
+                        mini = min(mini, dp[r+1][c+1]);
+                    }
+                    dp[r][c] = matrix[r][c] + mini;
+                }
+            }
+        }
+
+        return *min_element(dp[0].begin(), dp[0].end());
+    }
 };
 
 void doWork() {
     Solution sol;
     vector<vector<int>> vec = {{2, 1, 3}, {6, 5, 4}, {7, 8, 9}};
     cout << sol.minFallingPathSum(vec) << endl;
+    cout << sol.bottomUp(vec) << endl;
     vec = {{-19, 57}, {-40, -5}};
     cout << sol.minFallingPathSum(vec) << endl;
+    cout << sol.bottomUp(vec) << endl;
 }
