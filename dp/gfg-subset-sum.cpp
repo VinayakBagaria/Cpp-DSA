@@ -22,13 +22,41 @@ public:
         vector<vector<int>> dp(arr.size(), vector<int>(sum + 1, -1));
         return solve(0, sum, arr, dp);
     }
+
+    bool bottomUp(vector<int>& arr, int sum) {
+        int n = arr.size();
+        vector<vector<bool>> dp(n, vector<bool>(sum + 1));
+
+        for (int i = 0; i < n; i++) {
+            dp[i][0] = true;
+            if (arr[i] <= sum) dp[i][arr[i]] = true;
+        }
+
+        for (int i = n-2; i >= 0; i--) {
+            for (int s = 1; s <= sum; s++) {
+                bool take = false;
+                if (s >= arr[i]) take = dp[i + 1][s - arr[i]];
+
+                bool notTake = dp[i + 1][s];
+                dp[i][s] = take || notTake;
+            }
+        }
+
+        return dp[0][sum];
+    }
 };
 
 void doWork() {
     Solution sol;
     vector<int> vec = {3, 34, 4, 12, 5, 2};
     cout << sol.isSubsetSum(vec, 9) << endl;
+    cout << sol.bottomUp(vec, 9) << endl;
     vec = {3, 34, 4, 12, 5, 2};
     cout << sol.isSubsetSum(vec, 30) << endl;
+    cout << sol.bottomUp(vec, 30) << endl;
     cout << sol.isSubsetSum(vec, 2) << endl;
+    cout << sol.bottomUp(vec, 2) << endl;
+    vec = {6, 3, 7, 4, 1, 6, 4, 3, 7};
+    cout << sol.isSubsetSum(vec, 4) << endl;
+    cout << sol.bottomUp(vec, 4) << endl;
 }
