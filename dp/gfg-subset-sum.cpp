@@ -44,6 +44,31 @@ public:
 
         return dp[0][sum];
     }
+
+    bool spaceBottomUp(vector<int>& arr, int sum) {
+        int n = arr.size();
+        vector<bool> prev(sum + 1), curr(sum + 1);
+
+        // Sum 0 is always possible
+        prev[0] = true;
+
+        // This is is because the last element can be the sum and no else would be required after that + not possible after that even
+        if (arr[n-1] <= sum) prev[arr[n-1]] = true;
+
+        for (int i = n-2; i >= 0; i--) {
+            curr[0] = true;
+            for (int s = 1; s <= sum; s++) {
+                bool take = false;
+                if (s >= arr[i]) take = prev[s - arr[i]];
+
+                bool notTake = prev[s];
+                curr[s] = take || notTake;
+            }
+            prev = curr;
+        }
+
+        return prev[sum];
+    }
 };
 
 void doWork() {
@@ -51,12 +76,16 @@ void doWork() {
     vector<int> vec = {3, 34, 4, 12, 5, 2};
     cout << sol.isSubsetSum(vec, 9) << endl;
     cout << sol.bottomUp(vec, 9) << endl;
+    cout << sol.spaceBottomUp(vec, 9) << endl;
     vec = {3, 34, 4, 12, 5, 2};
     cout << sol.isSubsetSum(vec, 30) << endl;
     cout << sol.bottomUp(vec, 30) << endl;
+    cout << sol.spaceBottomUp(vec, 30) << endl;
     cout << sol.isSubsetSum(vec, 2) << endl;
     cout << sol.bottomUp(vec, 2) << endl;
+    cout << sol.spaceBottomUp(vec, 2) << endl;
     vec = {6, 3, 7, 4, 1, 6, 4, 3, 7};
     cout << sol.isSubsetSum(vec, 4) << endl;
     cout << sol.bottomUp(vec, 4) << endl;
+    cout << sol.spaceBottomUp(vec, 4) << endl;
 }
