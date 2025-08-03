@@ -1,4 +1,4 @@
-#include "dp/gfg-subset-sum.cpp"
+#include "dp/gfg-perfect-sum.cpp"
 using namespace std;
 
 int main() {
