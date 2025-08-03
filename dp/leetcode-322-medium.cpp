@@ -33,7 +33,7 @@ public:
 
     int bottomUp(vector<int>& coins, int amount) {
         if (amount == 0) return 0;
-        
+
         sort(coins.begin(), coins.end());
         int n = coins.size();
         vector<vector<int>> dp(n, vector<int>(amount + 1, 1e9));
@@ -41,7 +41,7 @@ public:
         for (int a = 0; a <= amount; a++) {
             dp[0][a] = (a % coins[0] == 0) ? a / coins[0] : 1e9;
         }
-        
+
         for (int i = 1; i < n; i++) {
             for (int a = 0; a <= amount; a++) {
                 int take = 1e9;
@@ -55,6 +55,32 @@ public:
 
         return dp[n-1][amount] == 1e9 ? -1 : dp[n-1][amount];
     }
+
+    int spaceBottomUp(vector<int>& coins, int amount) {
+        if (amount == 0) return 0;
+
+        sort(coins.begin(), coins.end());
+        int n = coins.size();
+        vector<int> prev(amount + 1, 1e9), curr(amount + 1, 1e9);
+
+        for (int a = 0; a <= amount; a++) {
+            prev[a] = (a % coins[0] == 0) ? a / coins[0] : 1e9;
+        }
+
+        for (int i = 1; i < n; i++) {
+            for (int a = 0; a <= amount; a++) {
+                int take = 1e9;
+                if (coins[i] <= a) {
+                    take = 1 + curr[a - coins[i]];
+                }
+                int notTake = prev[a];
+                curr[a] = min(take, notTake);
+            }
+            prev = curr;
+        }
+
+        return prev[amount] == 1e9 ? -1 : prev[amount];
+    }
 };
 
 void doWork() {
@@ -62,7 +88,9 @@ void doWork() {
     vector<int> vec = {1,2,5};
     cout << sol.coinChange(vec, 11) << endl;
     cout << sol.bottomUp(vec, 11) << endl;
+    cout << sol.spaceBottomUp(vec, 11) << endl;
     vec = {1, 2};
     cout << sol.coinChange(vec, 2) << endl;
     cout << sol.bottomUp(vec, 2) << endl;
+    cout << sol.spaceBottomUp(vec, 2) << endl;
 }
