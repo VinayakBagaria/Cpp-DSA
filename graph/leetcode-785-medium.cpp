@@ -23,28 +23,62 @@ public:
         return true;
     }
 
-    bool isBipartite(vector<vector<int>>& graph) {
-        int n = graph.size();
-        vector<int> colors(n, -1);
 
-        vector<vector<int>> adj(n);
-        for (int u = 0; u < graph.size(); u++) {
-            for (int v : graph[u]) {
-                adj[u].push_back(v);
-                adj[v].push_back(u);
-            }
-        }
+    bool bfs(int src, vector<vector<int>>& adj, vector<int>& colors) {
+        queue<int> q;
+        colors[src] = 0;
+        q.push(src);
 
-        for (int i = 0; i < n; i++) {
-            if (colors[i] == -1) {
-                colors[i] = 0;
-                if (!dfs(i, adj, colors)) {
+        while (!q.empty()) {
+            int u = q.front();
+            q.pop();
+
+            for (int v : adj[u]) {
+                if (colors[v] == -1) {
+                    colors[v] = !colors[u];
+                    q.push(v);
+                } else if (colors[u] == colors[v]) {
                     return false;
                 }
             }
         }
 
         return true;
+    }
+    
+    
+    bool isBipartiteBfs(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<int> colors(n, -1);
+
+        for (int i = 0; i < n; i++) {
+            if (colors[i] == -1) {
+                if (!bfs(i, graph, colors)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    bool isBipartiteDfs(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<int> colors(n, -1);
+
+        for (int i = 0; i < n; i++) {
+            if (colors[i] == -1) {
+                if (!dfs(i, graph, colors)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    bool isBipartite(vector<vector<int>>& graph) {
+        return isBipartiteBfs(graph);
     }
 };
 
