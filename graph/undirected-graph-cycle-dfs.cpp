@@ -5,26 +5,19 @@ using namespace std;
 
 class Solution {
   public:
-    bool bfs(int src, unordered_map<int, vector<int>>& adj, unordered_set<int>& visited) {
-        // node, prev parent
-        queue<pair<int, int>> q;
-        q.push({src, -1});
+    bool dfs(int src, int parent, unordered_map<int, vector<int>>& adj, unordered_set<int>& visited) {
         visited.insert(src);
 
-        while (!q.empty()) {
-            int u = q.front().first, parent = q.front().second;
-            q.pop();
-
-            for (int neigh : adj[u]) {
-                if (visited.find(neigh) == visited.end()) {
-                    q.push({neigh, u});
-                    visited.insert(neigh);
-                } else if (parent != neigh) {
-                    // This means the neighbour was already visited by someone in the past
-                    // So why the current node is again trying to access this node
-                    // Even if I am accessing, it can only be my 1-level upper parent
+        for (int neigh : adj[src]) {
+            if (visited.find(neigh) == visited.end()) {
+                if (dfs(neigh, src, adj, visited)) {
                     return true;
                 }
+            } else if (parent != neigh) {
+                // This means the neighbour was already visited by someone in the past
+                // So why the current node is again trying to access this node
+                // Even if I am accessing, it can only be my 1-level upper parent
+                return true;
             }
         }
 
@@ -45,7 +38,7 @@ class Solution {
         // The loop is only to handle disconnected components
         for (int i = 0; i < V; i++) {
             if (visited.find(i) == visited.end()) {
-                if (bfs(i, adj, visited)) return true;
+                if (dfs(i, -1, adj, visited)) return true;
             }
         }
 
