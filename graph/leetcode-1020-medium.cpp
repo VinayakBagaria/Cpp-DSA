@@ -25,7 +25,7 @@ public:
         return isFalsy ? 1e9 : sum;
     }
 
-    int numEnclaves(vector<vector<int>>& grid) {
+    int numEnclavesDfs(vector<vector<int>>& grid) {
         int r = grid.size(), c = grid[0].size();
         int result = 0;
         for (int i = 0; i < r; i++) {
@@ -40,10 +40,56 @@ public:
         }
         return result;
     }
+
+    // Multi-source BFS
+    // Start from boundary cells with 1
+    // Traverse from all these points
+    // The rest remaining would be unreachable from boundary
+    // Basically: Just reverse the question ideology
+    int numEnclavesBfs(vector<vector<int>>& grid) {
+        int r = grid.size(), c = grid[0].size();
+        
+        queue<pair<int, int>> q;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                if ((i == 0 || i == r - 1 || j == 0 || j == c - 1) && grid[i][j] == 1) {
+                    q.push({i, j});
+                    grid[i][j] = 0;
+                }
+            }
+        }
+
+        while (!q.empty()) {
+            int i = q.front().first, j = q.front().second;
+            q.pop();
+
+            for (auto& d : directions) {
+                int ni = i + d[0], nj = j + d[1];
+                if (ni >= 0 && ni < r - 1 && nj >= 0 && nj < c - 1 && grid[ni][nj] == 1) {
+                    q.push({ni, nj});
+                    grid[ni][nj] = 0;
+                }
+            }
+        }
+
+        int count = 0;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                if (grid[i][j] == 1) count++; 
+            }
+        }
+        return count;
+    }
+
+    int numEnclaves(vector<vector<int>>& grid) {
+        return numEnclavesBfs(grid);
+    }
 };
 
 void doWork() {
     Solution sol;
     vector<vector<int>> grid = {{0,0,0,1,1,1,0,1,0,0},{1,1,0,0,0,1,0,1,1,1},{0,0,0,1,1,1,0,1,0,0},{0,1,1,0,0,0,1,0,1,0},{0,1,1,1,1,1,0,0,1,0},{0,0,1,0,1,1,1,1,0,1},{0,1,1,0,0,0,1,1,1,1},{0,0,1,0,0,1,0,1,0,1},{1,0,1,0,1,1,0,0,0,0},{0,0,0,0,1,1,0,0,0,1}};
+    cout << sol.numEnclaves(grid) << endl;
+    grid = {{0,0,0,0}, {1,0,1,0},{0,1,1,0},{0,0,0,0}};
     cout << sol.numEnclaves(grid) << endl;
 }
