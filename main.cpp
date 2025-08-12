@@ -1,4 +1,4 @@
-#include "graph/leetcode-1020-medium.cpp"
+#include "greedy/gfg-shop-in-candy-store.cpp"
 using namespace std;
 
 int main() {
