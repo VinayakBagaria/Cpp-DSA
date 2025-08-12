@@ -1,4 +1,4 @@
-#include "greedy/gfg-shop-in-candy-store.cpp"
+#include "greedy/tywin-war-strategy.cpp"
 using namespace std;
 
 int main() {
