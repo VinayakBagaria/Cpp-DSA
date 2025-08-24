@@ -18,14 +18,10 @@ public:
         pq.push({0, k});
         vector<int> minTime(n + 1, INT_MAX);
         minTime[k] = 0;
-        unordered_set<int> vis;
 
         while (!pq.empty()) {
             auto [time, u] = pq.top();
             pq.pop();
-            vis.insert(u);
-
-            if (vis.size() == n) return time;
 
             for (auto& [v, duration] : adj[u]) {
                 int nextTime = time + duration;
@@ -36,7 +32,8 @@ public:
             }
         }
 
-        return -1;
+        int maxi = *max_element(minTime.begin() + 1, minTime.end());
+        return maxi == INT_MAX ? -1 : maxi;
     }
 };
 
