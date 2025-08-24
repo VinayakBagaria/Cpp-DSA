@@ -1,4 +1,4 @@
-#include "graph/leetcode-2065-hard.cpp"
+#include "graph/leetcode-3341-medium.cpp"
 using namespace std;
 
 int main() {
