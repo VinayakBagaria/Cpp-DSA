@@ -1,4 +1,4 @@
-#include "graph/cses-message-route.cpp"
+#include "graph/cses-building-teams.cpp"
 using namespace std;
 
 int main() {
