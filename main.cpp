@@ -1,4 +1,4 @@
-#include "graph/cses-counting-rooms.cpp"
+#include "graph/cses-labyrinth.cpp"
 using namespace std;
 
 int main() {
