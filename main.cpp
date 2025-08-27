@@ -1,4 +1,4 @@
-#include "graph/cses-building-teams.cpp"
+#include "sorting-searching/cses-ferris-wheel.cpp"
 using namespace std;
 
 int main() {
