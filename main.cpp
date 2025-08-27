@@ -1,4 +1,4 @@
-#include "binarySearch/gfg-allocate-pages.cpp"
+#include "graph/cses-counting-rooms.cpp"
 using namespace std;
 
 int main() {

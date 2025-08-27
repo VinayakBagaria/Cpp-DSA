@@ -11,9 +11,14 @@ public:
 
         for (r = 0; r < s.size(); r++) {
             mp[s[r]]++;
+            // frequency of the most frequent char
+            // in the window
             maxChar = max(maxChar, mp[s[r]]);
 
             int windowLen = r - l + 1;
+            // Except maxChar, we must try to change all
+            // other elements to this maxChar
+            // The no. of chars to change should be <= k for a valid window
             if (windowLen - maxChar > k) {
                 mp[s[l]]--;
                 l++;
