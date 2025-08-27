@@ -1,4 +1,4 @@
-#include "sorting-searching/cses-ferris-wheel.cpp"
+#include "sorting-searching/cses-concert-tickets.cpp"
 using namespace std;
 
 int main() {
