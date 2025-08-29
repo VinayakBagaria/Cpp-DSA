@@ -6,14 +6,15 @@ using namespace std;
 class Solution {
 public:
     int solve(vector<int>& vec) {
-        multiset<int> mt;
+        vector<int> mt;
         
         for (auto& it : vec) {
-            auto ub = mt.upper_bound(it);
-            if (ub != mt.end()) {
-                mt.erase(ub);
+            auto ub = upper_bound(mt.begin(), mt.end(), it);
+            if (ub == mt.end()) {
+                mt.push_back(it);
+            } else {
+                *ub = it;
             }
-            mt.insert(it);
         }
 
         return mt.size();
