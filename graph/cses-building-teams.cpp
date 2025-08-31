@@ -5,29 +5,32 @@ using namespace std;
 
 class Solution {
 public:
-    pair<bool, vector<int>> getTeam(vector<vector<int>> &adj, int n) {
-        vector<int> visited(n + 1);
+    bool dfs(int u, int parentColor, vector<vector<int>>& adj, vector<int>& colors) {
+        colors[u] = parentColor;
         
-        for (int i = 1; i <= n; i++) {
-            if (visited[i] == 0) {
-                visited[i] = 1;
-            }
-
-            int assigned = visited[i];
-            int rev = assigned == 1 ? 2 : 1;
-
-            for (auto& it : adj[i]) {
-                if (visited[it] == assigned) {
-                    return {false, vector<int>{}};
+        for (int& it : adj[u]) {
+            if (colors[it] == -1) {
+                if (dfs(it, !parentColor, adj, colors) == false) {
+                    return false;
                 }
-
-                if (visited[it] == 0) {
-                    visited[it] = rev;
-                }
+            } else if (colors[it] == parentColor) {
+                return false;
             }
         }
 
-        return {true, visited};
+        return true;
+    }
+
+    pair<bool, vector<int>> getTeam(vector<vector<int>> &adj, int n) {
+        vector<int> colors(n + 1, -1);
+
+        for (int i = 1; i <= n; i++) {
+            if (colors[i] == -1 && dfs(i, 0, adj, colors) == false) {
+                return {false, colors};
+            }
+        }
+
+        return {true, colors};
     }
 };
 
@@ -42,14 +45,13 @@ void doWork() {
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
+
     Solution sol = Solution();
-    auto [possible, visited] = sol.getTeam(adj, n);
+    auto [possible, colors] = sol.getTeam(adj, n);
     if (!possible) {
         cout << "IMPOSSIBLE" << endl;
         return;
     }
 
-    for (int i = 1; i < visited.size(); i++) cout << visited[i] << " ";
-    
-    cout << endl;
+    for (int i = 1; i <= n; i++) cout << colors[i] + 1 << " ";
 }
