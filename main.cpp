@@ -1,4 +1,4 @@
-#include "graph/cses-longest-flight-route.cpp"
+#include "graph/cses-investigation.cpp"
 using namespace std;
 
 int main() {
