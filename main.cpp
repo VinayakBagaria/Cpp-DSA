@@ -1,4 +1,4 @@
-#include "sorting-searching/cses-stick-lengths.cpp"
+#include "sorting-searching/cses-collecting-numbers.cpp"
 using namespace std;
 
 int main() {
