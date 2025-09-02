@@ -1,4 +1,4 @@
-#include "graph/cses-investigation.cpp"
+#include "sorting-searching/cses-stick-lengths.cpp"
 using namespace std;
 
 int main() {
