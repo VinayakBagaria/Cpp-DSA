@@ -1,4 +1,4 @@
-#include "sorting-searching/cses-restaurant-customers.cpp"
+#include "graph/cses-building-teams.cpp"
 using namespace std;
 
 int main() {

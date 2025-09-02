@@ -21,16 +21,16 @@ public:
         return true;
     }
 
-    pair<bool, vector<int>> getTeam(vector<vector<int>> &adj, int n) {
+    vector<int> getTeam(vector<vector<int>> &adj, int n) {
         vector<int> colors(n + 1, -1);
 
         for (int i = 1; i <= n; i++) {
             if (colors[i] == -1 && dfs(i, 0, adj, colors) == false) {
-                return {false, colors};
+                return {};
             }
         }
 
-        return {true, colors};
+        return colors;
     }
 };
 
@@ -47,8 +47,8 @@ void doWork() {
     }
 
     Solution sol = Solution();
-    auto [possible, colors] = sol.getTeam(adj, n);
-    if (!possible) {
+    auto colors = sol.getTeam(adj, n);
+    if (colors.size() == 0) {
         cout << "IMPOSSIBLE" << endl;
         return;
     }
