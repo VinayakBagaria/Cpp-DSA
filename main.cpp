@@ -1,4 +1,4 @@
-#include "sorting-searching/cses-collecting-numbers.cpp"
+#include "sorting-searching/cses-traffic-lights.cpp"
 using namespace std;
 
 int main() {
