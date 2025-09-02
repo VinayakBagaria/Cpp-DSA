@@ -1,4 +1,4 @@
-#include "sorting-searching/cses-tasks-deadlines.cpp"
+#include "sorting-searching/cses-restaurant-customers.cpp"
 using namespace std;
 
 int main() {
