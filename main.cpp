@@ -1,4 +1,4 @@
-#include "graph/cses-building-teams.cpp"
+#include "heap/leetcode-2708-medium.cpp"
 using namespace std;
 
 int main() {
