@@ -1,4 +1,4 @@
-#include "graph/leetcode-1743-medium.cpp"
+#include "hashmap/leetcode-1814-medium.cpp"
 using namespace std;
 
 int main() {
