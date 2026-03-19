@@ -16,23 +16,17 @@ public:
         
         while (!mp.empty()) {
             int smallest = mp.begin()->first;
-            bool success = true;
 
             for (int i = 0; i < groupSize; i++) {
                 int nextElement = smallest + i;
                 if (mp.find(nextElement) == mp.end()) {
-                    success = false;
-                    break;
+                    return false;
                 }
 
                 mp[nextElement]--;
                 if (mp[nextElement] == 0) {
                     mp.erase(nextElement);
                 }
-            }
-
-            if (!success) {
-                return false;
             }
         }
 
