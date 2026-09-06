@@ -1,4 +1,4 @@
-#include "hashmap/leetcode-3335-medium.cpp"
+#include "heap/lc-973-medium.cpp"
 using namespace std;
 
 int main() {
